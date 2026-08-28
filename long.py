@@ -101,12 +101,9 @@ found = False
 for r in results:
     if r["highest_count"] >= 120:
         found = True
-        print(f"{r['symbol']:18}.split("/")[0]")
+        print(f"{r['symbol']:18}")
 
 if not found:
     print("조건을 만족하는 티커가 없습니다.")
 
 print("=" * 45)
-
-
-#매물대 없는 티커 출력 -> 낮은 프레임 캔들에서 롱스퀴징 발생 확인하고 롱
