@@ -145,7 +145,7 @@ for symbol, info in sorted(
 ):
 
     try:
-
+        print(symbol)
         # MA 계산을 위해 20개 이상 필요
         data = ex.fetch_ohlcv(symbol, timeframe=k, limit=LOOKBACK+20)
 
@@ -169,11 +169,8 @@ for symbol, info in sorted(
 
         drawdown = (current-highest)/highest*100
 
-        if drawdown <= -10 and ma5 < ma20:
-            print(f"{symbol:20}.split("/")[0]")
+        if drawdown <= -10 or ma5 < ma20:
+            print(f"{symbol:20}")
 
     except:
         continue
-
-    
-#24시간 행렬표에서 한번이라도 top3안에 들면 출력 -> 추세 깨진거 확인하고 -> 숏스퀴징 발생하면 -> 숏
