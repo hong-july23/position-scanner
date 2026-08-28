@@ -1,0 +1,39 @@
+name: SHORT Scanner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Check Python
+        run: |
+          python --version
+          pip --version
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Check installed packages
+        run: |
+          pip show ccxt
+          pip show pandas
+
+      - name: Test Binance connection
+        run: |
+          python -c "import ccxt; print('ccxt import OK'); ex=ccxt.binanceusdm({'enableRateLimit': True}); ex.options['defaultType']='future'; print('Binance object OK'); print(ex.fetch_time()); print('BINANCE API OK')"
+
+      - name: Run SHORT scanner
+        run: |
+          python -u short.py
